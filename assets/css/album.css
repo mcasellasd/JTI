@@ -1,3 +1,8 @@
+.mlkln-album {
+    display: flex;
+    gap: 1.5rem;
+}
+
 .mlkln-album-card {
     padding: 20px;
     border-radius: 10px;
