@@ -1,13 +1,13 @@
 import * as THREE from 'three'
 import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls'
-import { STLLoader } from 'three/examples/jsm/loaders/STLLoader'
+import { OBJLoader } from 'three/examples/jsm/loaders/OBJLoader'
 import Stats from 'three/examples/jsm/libs/stats.module'
 
 const scene = new THREE.Scene()
 scene.add(new THREE.AxesHelper(5))
 
-const light = new THREE.SpotLight()
-light.position.set(20, 20, 20)
+const light = new THREE.PointLight()
+light.position.set(2.5, 7.5, 15)
 scene.add(light)
 
 const camera = new THREE.PerspectiveCamera(
@@ -19,41 +19,25 @@ const camera = new THREE.PerspectiveCamera(
 camera.position.z = 3
 
 const renderer = new THREE.WebGLRenderer()
-renderer.outputEncoding = THREE.sRGBEncoding
 renderer.setSize(window.innerWidth, window.innerHeight)
 document.body.appendChild(renderer.domElement)
 
 const controls = new OrbitControls(camera, renderer.domElement)
 controls.enableDamping = true
 
-const envTexture = new THREE.CubeTextureLoader().load([
-    'img/px_50.png',
-    'img/nx_50.png',
-    'img/py_50.png',
-    'img/ny_50.png',
-    'img/pz_50.png',
-    'img/nz_50.png'
-])
-envTexture.mapping = THREE.CubeReflectionMapping
+// const material = new THREE.MeshBasicMaterial({ color: 0x00ff00, wireframe: true })
 
-const material = new THREE.MeshPhysicalMaterial({
-    color: 0xb2ffc8,
-    envMap: envTexture,
-    metalness: 0.25,
-    roughness: 0.1,
-    opacity: 1.0,
-    transparent: true,
-    transmission: 0.99,
-    clearcoat: 1.0,
-    clearcoatRoughness: 0.25
-})
-
-const loader = new STLLoader()
-loader.load(
-    'models/example.stl',
-    function (geometry) {
-        const mesh = new THREE.Mesh(geometry, material)
-        scene.add(mesh)
+const objLoader = new OBJLoader()
+objLoader.load(
+    'models/cube.obj',
+    (object) => {
+        // (object.children[0] as THREE.Mesh).material = material
+        // object.traverse(function (child) {
+        //     if ((child as THREE.Mesh).isMesh) {
+        //         (child as THREE.Mesh).material = material
+        //     }
+        // })
+        scene.add(object)
     },
     (xhr) => {
         console.log((xhr.loaded / xhr.total) * 100 + '% loaded')
