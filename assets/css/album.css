@@ -7,8 +7,15 @@
 }
 .hidden {
     display: none;
+    
 }
-
+.mlkln3-packets {
+    display: flex; 
+    flex-wrap: wrap;
+    gap: 1.5rem;
+    width: inherit;
+    margin: 10px
+}
 .mlkln-album-card {
     width: 20em;
     padding: 20px;
