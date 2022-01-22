@@ -1,5 +1,6 @@
 .mlkln-album {
-    display: flex;
+    display: flex; 
+    flex-wrap: wrap;
     gap: 1.5rem;
     width: inherit;
     margin: 10px
