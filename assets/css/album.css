@@ -5,6 +5,9 @@
     width: inherit;
     margin: 10px
 }
+.hidden {
+      display: none;
+}
 
 .mlkln-album-card {
     width: 20em;
